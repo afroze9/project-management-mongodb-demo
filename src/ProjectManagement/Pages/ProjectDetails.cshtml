@@ -1,0 +1,57 @@
+﻿@page
+@model ProjectManagement.Pages.ProjectDetailsModel
+
+@{
+    ViewData["Title"] = "Company Details";
+}
+
+<h3>
+    @Model.Project.Name
+</h3>
+
+<p>
+    <a asp-page="CreateTask" asp-route-projectId="@Model.Project.ID">Create Task</a>
+</p>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Tasks[0].Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Tasks[0].IsComplete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Tasks[0].CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Tasks[0].ModifiedOn)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (TaskListingVM item in Model.Project.Tasks)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                <a asp-page="./TaskDetails" asp-route-id="@item.ID">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
